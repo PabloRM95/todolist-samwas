@@ -1,5 +1,5 @@
 export interface TODO {
-    text:string,
+    title:string,
     id:number,
     completed:boolean,
     date:number,
