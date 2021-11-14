@@ -28,17 +28,26 @@ export class TodoGayComponent implements OnInit {
       completed: false,
       date: Date.now(),
     };
-    this.listaGay.push(newTask);
-    this.textGay = '';
-  }
+    if(this.textGay.length != 0){this.TodoService.createOne(newTask)
+      .then((res: TODO[]) => {
+        this.listaGay.push(newTask);
+        this.textGay = '';
+      })
+      .catch((e) => e);
+  }}
 
   deleteTask(id: string) {
-    this.listaGay = this.listaGay.filter((task) => task.id != id);
+    this.TodoService.deleteOne(id)
+      .then((res: TODO[]) => {
+        this.listaGay = this.listaGay.filter((task) => task.id != id);
+      })
+      .catch((e) => e);
   }
-
   completedTask(id: string) {
     let task = this.listaGay.find((todo) => todo.id === id) as TODO;
     task.completed = !task.completed;
-    console.log(task);
+    this.TodoService.modifyOne(task).then((res: TODO[]) => {
+    }).catch((e => e));
   }
+  
 }
