@@ -1,8 +1,26 @@
-<h1>Todo List Gay</h1>
-<div>
-    <input [(ngModel)]='textGay' type="text" placeholder="pon tu texto gay">
-    <button>Abre tu culo</button>
+<div class="gay">
+  <h1>Todo List Gay</h1>
+  <form>
+    <div class="form-group">
+      <input
+        [(ngModel)]="textGay"
+        type="text"
+        placeholder="pon tu texto gay"
+        class="form-control"
+      />
+      <button (click)="addNewTask()" class="btn btn-primary">
+        Abre tu culo
+      </button>
+    </div>
+  </form>
+  <ul>
+    <li *ngFor="let todo of listaGay" [class.rojo]="todo.completed">
+      <input
+        (click)="completeTask(todo.id)"
+        type="checkbox"
+        [checked]="todo.completed"
+      />
+      {{ todo.title }} <button (click)="deleteTask(todo.id)">X</button>
+    </li>
+  </ul>
 </div>
-<ul>
-    <li *ngFor='let todo of listaGay'> {{todo.title}} <button>X</button></li>
-</ul>
